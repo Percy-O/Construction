@@ -1,0 +1,62 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="mt-4">Add New Project</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'project:dashboard' %}"> Dashboard</a></li>
+    <li class="breadcrumb-item active">
+    	{% if form.instance.pk %}
+			Update {{form.instance.name}} Project
+		{% else %}
+			Add New Project
+		{% endif %}
+    </li>
+</ol>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			
+		</div>
+
+		<div class="col-md-6 bg-white pb-5 pt-2">
+			<div class="row">
+				<h2>
+					{% if form.instance.pk %}
+						Update <b><i>{{form.instance.name}}</i></b> 
+					{% else %}
+						Add New Project
+					{% endif %}
+				</h2>
+				<hr>
+				<div class="col-md-12">
+					<form class="" action="" method="POST" enctype="multipart/form-data">
+
+						<div class="form-group">
+							{% csrf_token %}
+							{{form|crispy}}
+						</div>
+
+						<button class="btn btn-dark mt-3"><span class="fa fa-columns"></span> 
+						{% if form.instance.pk %}
+						Update Project
+						{% else %}
+						Add Project
+						{% endif %}
+					</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

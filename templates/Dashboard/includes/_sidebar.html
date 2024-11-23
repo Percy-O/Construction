@@ -1,0 +1,90 @@
+<!--  <style type="text/css">
+     .nav-link{
+        color: white !important;
+     }
+ </style> -->
+ <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark " id="sidenavAccordion" style="background: #052b58;">
+        <div class="sb-sidenav-menu text-white">
+            <div class="nav text-white" style="color:white !important;">
+                <div class="sb-sidenav-menu-heading " >Core</div>
+                <a class="nav-link text-white" href="{% url 'project:dashboard' %}">
+                    <div class="sb-nav-link-icon "><i class="fa fa-tachometer"></i></div>
+                    Dashboard
+                </a>
+                <div class="sb-sidenav-menu-heading ">PROJECT OPERATION</div>
+                <a class="nav-link collapsed" id="store" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fa fa-columns"></i></div>
+                    Construction Project
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts" aria-labelledby="project" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+
+<!-- Project -->
+                        <a class="nav-link collapsed" id="project" href=""data-bs-toggle="collapse" data-bs-target="#collapseProject" aria-expanded="false" aria-controls="collapseProject">
+                            <div class="sb-nav-link-icon"><i class="fa fa-check"></i></div>
+                            Project
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                        </a>
+
+                        <div class="collapse" id="collapseProject" aria-labelledby="project" >
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'project:project_create' %}">Add New Project</a>
+                                <a class="nav-link" href="{% url 'project:project_list' %}">All Project</a>
+                            </nav>
+                            
+                        </div>
+
+<!-- Equipment -->
+                        <a class="nav-link collapsed" id="equipment" href=""data-bs-toggle="collapse" data-bs-target="#collapseEquipment" aria-expanded="false" aria-controls="collapseEquipment">
+                            <div class="sb-nav-link-icon"><i class="fa fa-check"></i></div>
+                           Equipment
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                        </a>
+
+                        <div class="collapse" id="collapseEquipment" aria-labelledby="equipment" >
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'project:equip_create' %}">Add Equipment</a>
+                                <a class="nav-link" href="{% url 'project:equip_list' %}">All Equipment</a>
+                            </nav>
+                        </div>
+
+<!-- Usage -->
+                        <a class="nav-link collapsed" id="usage" href=""data-bs-toggle="collapse" data-bs-target="#collapseUsage" aria-expanded="false" aria-controls="collapseUsage">
+                            <div class="sb-nav-link-icon"><i class="fa fa-check"></i></div>
+                           Equipment Usage
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                        </a>
+
+                        <div class="collapse" id="collapseUsage" aria-labelledby="usage" >
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'project:usage_create' %}">Collect Equipment</a>
+                                <a class="nav-link" href="{% url 'project:usage_list' %}">Collected Equipment</a>
+                            </nav>
+                        </div>
+
+                        
+                    </nav>
+                </div>
+                <div class="sb-sidenav-menu-heading ">Others</div>
+                <!-- <a class="nav-link" href="">
+                    <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                    Edit Staff Account
+                </a> -->
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <div class="sb-nav-link-icon"><i class="fa fa-sign-out"></i></div>
+                    Logout
+                </a>
+                <!-- <a class="nav-link" href="tables.html">
+                    <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
+                    Tables
+                </a> -->
+            </div>
+        </div>
+        <div class="sb-sidenav-footer text-dark " style="text-transform: capitalize;background: rgba(255, 255, 255, 0.8);">
+            <div class="small">Logged in as:</div>
+            {{request.user.username}}
+        </div>
+    </nav>
+</div>

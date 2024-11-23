@@ -1,0 +1,52 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="mt-4">All Equipment</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'project:dashboard' %}"> Dashboard</a></li>
+    <li class="breadcrumb-item active">All Equipment</li>
+</ol>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        {% include 'project/includes/messages.html' %}
+        <div class="table-responsive bg-white p-3">
+        <table class="table table-striped table-hover" id="table-data">
+          <caption>List of Equipments</caption>
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Equipment ID</th>
+              <th scope="col">Project</th>
+              <th scope="col">Tool</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for equipment in equipments %}
+            <tr>
+              <th scope="row">{{equipment.id}}</th>
+              <th scope="row">{{equipment.project.name}}</th>
+              <th scope="row"><a href="{% url 'project:equip_detail' slug=equipment.slug %}" class=" text-dark  ">{{equipment.tool}}</a></th>
+              <th scope="row">{{equipment.quantity}}</th>
+              <th scope="row">{{equipment.price}}</th>
+
+              <td> 
+                <a href="{% url 'project:equip_delete' equipment.slug %}" class="btn btn-danger btn-sm">Delete</a> 
+                <a href="{% url 'project:equip_update' equipment.slug %}" class="btn btn-warning btn-sm">Update</a> 
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

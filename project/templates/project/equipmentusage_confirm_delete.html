@@ -1,0 +1,23 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+	<div class="row bg-white mt-5 rounded p-3">
+		<div class="col-md-12">
+
+			<h3>Do you want to delete <span style="color:rgb(194, 6, 6)">{{usage.user}} - {{usage.equipment.tool}}</span>?</h3>
+			<form action="" method="post">
+			    {% csrf_token %}
+			<button type="submit" class="btn btn-danger">Delete</button>
+			<a class=" btn btn-dark" href="{% url 'project:equip_list'%}">Cancel</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock content %}

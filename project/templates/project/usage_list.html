@@ -1,0 +1,56 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="mt-4">All Equipment</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'project:dashboard' %}"> Dashboard</a></li>
+    <li class="breadcrumb-item active">All Equipment Usage</li>
+</ol>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        {% include 'project/includes/messages.html' %}
+        <div class="table-responsive bg-white p-3">
+        <table class="table table-striped table-hover" id="table-data">
+          <caption>List of collected Equipment</caption>
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Equipment Usage ID</th>
+              <th scope="col">User</th>
+              <th scope="col">Project</th>
+              <th scope="col">Equipment</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Date Collected</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for usage in usages %}
+            <tr>
+              <th scope="row">{{usage.id}}</th>
+              <th scope="row">{{usage.user}}</th>
+              <th scope="row">{{usage.project.name}}</th>
+              <th scope="row">{{usage.equipment.tool}}</a></th>
+              <th scope="row">{{usage.quantity}}</th>
+              <th scope="row">{{usage.price}}</th>
+              <th scope="row">{{usage.collected_at}}</th>
+
+              <td> 
+                <a href="{% url 'project:usage_delete' pk=usage.pk %}" class="btn btn-danger btn-sm">Delete</a> 
+                <a href="{% url 'project:usage_update' pk=usage.pk %}" class="btn btn-warning btn-sm">Update</a> 
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

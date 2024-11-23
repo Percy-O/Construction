@@ -1,0 +1,72 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="mt-4">All Project</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'project:dashboard' %}"> Dashboard</a></li>
+    <li class="breadcrumb-item active">All Project</li>
+</ol>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        {% include 'project/includes/messages.html' %}
+        <div class="table-responsive bg-white p-3">
+        <table class="table table-striped table-hover" id="table-data">
+          <caption>List of Projects</caption>
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Project ID</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Budget</th>
+              <th scope="col">Project type</th>
+              <th scope="col">Architectural Design</th>
+              <!-- <th scope="col">Equipment</th> -->
+              <th scope="col">Project Start</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for project in projects %}
+            <tr>
+              <th scope="row">{{project.id}}</th>
+              <th scope="row"><a href="{% url 'project:project_detail' slug=project.slug %}" class=" text-dark  ">{{project.name}}</a></th>
+              <th scope="row">{{project.location}}</th>
+              <th scope="row">{{project.budget}}</th>
+              <th scope="row">{{project.project_type}}</th>
+              <th scope="row">
+                    <img src="{{project.sketch_project_image.url}}" width=70 height=70>
+                    <!-- {{project.sketch_project_image}} -->
+                </th>
+                <!-- equipment -->
+                <!-- <th>
+                  {% for equip in project.equipment.all %}
+                  <li>{{equip.tool}},</li>
+                  {% endfor %}
+                </th> -->
+
+              <th scope="row">
+                  {% if project.start_at != None %}
+                  <button class="btn btn-disabled btn-info" type="disabled">Project Started</button>
+                  {% else %}
+                  <a href="{% url 'project:project_start' slug=project.slug %}" class="btn btn-dark"><span class="fa fa-check"></span>  Start Project</a>
+                  {% endif %}
+              </th>
+              <td> 
+                <a href="{% url 'project:project_delete' project.slug %}" class="btn btn-danger btn-sm">Delete</a> 
+                <a href="{% url 'project:project_update' project.slug %}" class="btn btn-warning btn-sm">Update</a> 
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

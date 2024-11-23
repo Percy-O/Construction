@@ -1,0 +1,104 @@
+{% extends 'Dashboard/base.html' %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style type="text/css">
+    table tr td {
+        line-height:50px ;
+    }
+</style>
+
+<h1 class="mt-4">All Project</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'project:dashboard' %}"> Dashboard</a></li>
+    <li class="breadcrumb-item active">Project Details</li>
+</ol>
+
+<div class="container bg-white py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+            <h3>{{project.name}} Full Details</h3>
+
+            {% if project.start_at == None%}
+            <a class="btn btn-dark" href="{% url 'project:project_start' slug=project.slug %}"><span class="fa fa-check"></span> Start Project</a>
+            {% endif%}
+            </div>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover h-100" >
+                  <caption>{{project.name}} Details</caption>
+                  <tbody class="">
+                    <tr class="">
+                      <td><b>Project Name: </b></td>
+                      <td>{{project.name}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Project Type</b></td>
+                      <td>{{project.project_type}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Project Location: </b></td>
+                      <td>{{project.location}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Project budget</b></td>
+                      <td>{{project.budget}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Project Start_date: </b></td>
+                      <td>
+                      {% if project.start_at == None %}
+                      Not Yet Started
+                      {% else %}
+                      Started - {{project.start_at}}
+                      {% endif %}
+                    </td>
+                    </tr>
+                    <tr>
+                      <td><b>Project Architectural Design</b></td>
+                      <td><img src="{{project.sketch_project_image.url}}" width="100" height="100"> </td>
+                    </tr>
+                    <tr>
+                      <td><b>Equipment</b></td>
+                      <td>
+                        {% if project.equipment.all.count == 0 %}
+                        No Equipment Assigned to this Project yet
+                        {% else %}
+                        <table class="table table-bordered ">
+                            <thead>
+                                <th>Id</th>
+                                <th>Tool Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </thead>
+                            <tbody>
+                                {% for equip in project.equipment.all %}
+                                <tr>
+                                    <td>{{equip.id}}</td>
+                                    <td>{{equip.tool}}</td>
+                                    <td>{{equip.price}}</td>
+                                    <td>{{equip.quantity}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+
+
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+            </div>
+            {% if project.start_at == None%}
+            <a class="btn btn-dark " href="{% url 'project:project_start' slug=project.slug %}"><span class="fa fa-check"></span> Start Project</a>
+            {% endif%}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
